@@ -1,0 +1,254 @@
+/* estilos/editoras.css */
+
+/* Estilo global */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #faf3f7;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Cabecera */
+header {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 24px;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Barra de navegación */
+header {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Barra de navegación */
+nav {
+  background-color: #222;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+  padding: 8px 15px;
+  transition: background-color 0.3s, border-radius 0.3s;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #333;
+}
+
+
+/* Contenedor principal */
+section {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilos del formulario */
+form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+form button {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: #6a006a;
+}
+
+/* Formulario de edición */
+#formularioEdicion {
+  display: none;
+  margin-top: 30px;
+}
+
+#formularioEdicion input,
+#formularioEdicion select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#formularioEdicion button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#formularioEdicion button:hover {
+  background-color: #218838;
+}
+
+/* Lista de editoras */
+#editoraList {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#editoraList li {
+  background-color: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#editoraList li span {
+  font-size: 1.2em;
+  color: #333;
+}
+
+/* Botones de acción */
+button {
+  background-color: #009688;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  display: block;
+  margin: 20px auto;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #00796b;
+}
+
+button.edit {
+  background-color: #ffa000;
+}
+
+button.edit:hover {
+  background-color: #ff8f00;
+}
+
+button.delete {
+  background-color: #f44336;
+}
+
+button.delete:hover {
+  background-color: #e53935;
+}
+
+/* Pie de página */
+footer {
+  text-align: center;
+  background-color: #4b0082;
+  color: white;
+  padding: 15px;
+  margin-top: 30px;
+  font-size: 14px;
+  border-top: 3px solid #8b008b;
+}
+
+/* Diseño responsivo */
+@media (max-width: 600px) {
+  body {
+      font-size: 14px;
+  }
+
+  form {
+      margin: 10px;
+      padding: 15px;
+  }
+
+  button,
+  form button {
+      font-size: 1em;
+      padding: 8px 15px;
+  }
+
+  #editoraList li {
+      font-size: 1em;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .delete,
+  .edit {
+      margin-top: 10px;
+      width: 100%;
+  }
+}

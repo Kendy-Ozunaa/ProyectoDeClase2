@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipos de Bibliografía - Sistema de Biblioteca</title>
+  <link rel="stylesheet" href="css/tiposBibliografia.css">
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <a href="index.html">
+      <h1>Sistema de Biblioteca - UNAPEC</h1>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="tiposBibliografia.html">Tipos de Bibliografía</a></li>
+        <li><a href="editoras.html">Editoras</a></li>
+        <li><a href="autores.html">Autores</a></li>
+        <li><a href="libros.html">Libros</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <section>
+    <h2>Gestión de Tipos de Bibliografía</h2>
+    
+    <!-- Formulario de Agregar Nuevo Tipo de Bibliografía -->
+    <form id="tipoBibliografiaForm">
+      <label for="tipoBibliografia">Descripción:</label>
+      <input type="text" id="tipoBibliografia" placeholder="Tipo de Bibliografía" required>
+      
+      <label for="estado">Estado:</label>
+      <select id="estado" required>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+
+      <button type="submit">Agregar Tipo de Bibliografía</button>
+    </form>
+
+    <!-- Formulario de Edición -->
+    <div id="formularioEdicion" style="display:none;">
+      <h3>Editar Tipo de Bibliografía</h3>
+      <input type="text" id="editarDescripcion" placeholder="Descripción" required>
+      <select id="editarEstado" required>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+      <button onclick="guardarEdicion()">Guardar Cambios</button>
+      <button onclick="cancelarEdicion()">Cancelar</button>
+    </div>
+
+    <h3>Lista de Tipos de Bibliografía</h3>
+    <ul id="tipoBibliografiaList"></ul>
+  </section>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>&copy; 2025 UNAPEC. Todos los derechos reservados.</p>
+  </footer>
+  
+  <script>
+    const apiUrl = 'http://localhost:3000/api/tiposBibliografia';
+    let tipoEnEdicion = null;  // Variable para almacenar el tipo que se está editando
+  
+    // Función para obtener los tipos de bibliografía
+    const obtenerTipos = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        const tipos = await response.json();
+        renderizarTipos(tipos);
+      } catch (error) {
+        alert('Error al obtener tipos de bibliografía: ' + error.message);
+      }
+    };
+  
+    // Función para renderizar la lista de tipos de bibliografía
+    const renderizarTipos = (tipos) => {
+      const tipoBibliografiaList = document.getElementById('tipoBibliografiaList');
+      tipoBibliografiaList.innerHTML = ''; // Limpiar la lista antes de renderizar
+  
+      if (tipos.length === 0) {
+        tipoBibliografiaList.innerHTML = "<li>No hay tipos de bibliografía registrados.</li>";
+      } else {
+        tipos.forEach(tipo => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span><strong>Identificador:</strong> ${tipo.id}</span><br>
+            <span><strong>Descripción:</strong> ${tipo.descripcion}</span><br>
+            <span><strong>Estado:</strong> ${tipo.estado}</span><br>
+            <button class="edit" onclick="editarTipo(${tipo.id}, '${tipo.descripcion}', '${tipo.estado}')">Editar</button>
+            <button class="delete" onclick="eliminarTipo(${tipo.id})">Eliminar</button>
+          `;
+          tipoBibliografiaList.appendChild(li);
+        });
+      }
+    };
+  
+    // Función para agregar un tipo de bibliografía
+    const agregarTipo = async (event) => {
+      event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+  
+      const nuevoTipo = {
+        descripcion: document.getElementById('tipoBibliografia').value,
+        estado: document.getElementById('estado').value // Estado basado en la selección
+      };
+  
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(nuevoTipo)
+        });
+  
+        if (response.ok) {
+          const tipoAgregado = await response.json();
+          console.log("Tipo de bibliografía agregado:", tipoAgregado);
+          obtenerTipos(); // Recargar la lista
+        } else {
+          console.error("Error al agregar el tipo de bibliografía");
+        }
+      } catch (error) {
+        console.error("Error de red:", error);
+      }
+    };
+  
+    // Función para eliminar un tipo de bibliografía
+    const eliminarTipo = async (id) => {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: 'DELETE'
+        });
+  
+        if (!response.ok) {
+          throw new Error('No se pudo eliminar el tipo de bibliografía');
+        }
+  
+        const data = await response.json();
+        alert(data.mensaje);
+        obtenerTipos(); // Recargar la lista
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+  
+    // Función para editar un tipo de bibliografía
+    const editarTipo = (id, descripcion, estado) => {
+      tipoEnEdicion = { id, descripcion, estado };
+
+      // Mostrar el formulario de edición
+      document.getElementById('formularioEdicion').style.display = 'block';
+      document.getElementById('editarDescripcion').value = descripcion;
+      document.getElementById('editarEstado').value = estado;
+    };
+
+    // Función para guardar los cambios de edición
+    const guardarEdicion = async () => {
+      if (!tipoEnEdicion) return;
+
+      const tipoActualizado = {
+        descripcion: document.getElementById('editarDescripcion').value,
+        estado: document.getElementById('editarEstado').value
+      };
+
+      try {
+        const response = await fetch(`${apiUrl}/${tipoEnEdicion.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(tipoActualizado)
+        });
+
+        if (response.ok) {
+          alert('Tipo de bibliografía actualizado con éxito.');
+          obtenerTipos(); // Recargar la lista
+          cancelarEdicion(); // Ocultar el formulario de edición
+        } else {
+          alert('Error al actualizar el tipo de bibliografía.');
+        }
+      } catch (error) {
+        alert('Error de red: ' + error.message);
+      }
+    };
+
+    // Función para cancelar la edición
+    const cancelarEdicion = () => {
+      document.getElementById('formularioEdicion').style.display = 'none';
+      tipoEnEdicion = null;
+    };
+  
+    // Evento de submit en el formulario
+    document.getElementById('tipoBibliografiaForm').addEventListener('submit', agregarTipo);
+  
+    // Obtener los tipos de bibliografía cuando cargue la página
+    window.onload = obtenerTipos;
+  </script>
+
+</body>
+</html>

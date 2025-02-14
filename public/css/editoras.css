@@ -1,0 +1,200 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Estilo del encabezado */
+header {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Barra de navegación */
+nav {
+  background-color: #222;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+  padding: 8px 15px;
+  transition: background-color 0.3s, border-radius 0.3s;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #333;
+}
+
+/* Sección de contenido */
+section {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilo del formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #eaeaea;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form input,
+form select {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+form button {
+  background-color: #222;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: #575757;
+}
+
+/* Formulario de edición */
+#formularioEdicion {
+  display: none;
+  margin-top: 30px;
+}
+
+#formularioEdicion input,
+#formularioEdicion select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#formularioEdicion button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+#formularioEdicion button:hover {
+  background-color: #218838;
+}
+
+/* Lista de editoras */
+#editoraList {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#editoraList li {
+  background: #fff;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#editoraList li span {
+  font-size: 16px;
+  color: #333;
+}
+
+/* Botones de editar y eliminar */
+button.edit,
+button.delete {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+  border: none;
+  color: white;
+}
+
+button.edit {
+  background-color: #1e90ff;
+}
+
+button.edit:hover {
+  background-color: #1565c0;
+}
+
+button.delete {
+  background-color: #dc143c;
+}
+
+button.delete:hover {
+  background-color: #a00027;
+}
+
+/* Pie de página */
+footer {
+  background-color: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+  font-size: 14px;
+  border-top: 3px solid #575757;
+}

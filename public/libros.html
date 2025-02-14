@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libros - Sistema de Biblioteca</title>
+  <link rel="stylesheet" href="css/libros.css">
+</head>
+<body>
+  <header>
+    <h1>Sistema de Biblioteca - UNAPEC</h1>
+  </header>
+
+  <!-- Barra de navegación -->
+  <nav>
+    <ul>
+      <li><a href="tiposBibliografia.html">Tipos de Bibliografía</a></li>
+      <li><a href="editoras.html">Editoras</a></li>
+      <li><a href="autores.html">Autores</a></li>
+      <li><a href="libros.html">Libros</a></li>
+    </ul>
+  </nav>
+
+  <section>
+    <h2>Gestión de Libros</h2>
+    <form id="libroForm">
+      <input type="text" id="descripcion" placeholder="Descripción" required>
+      <input type="text" id="signaturaTopografica" placeholder="Signatura topográfica" required>
+      <input type="text" id="isbn" placeholder="ISBN" required>
+      <input type="text" id="tipoBibliografia" placeholder="Tipo Bibliografía" required>
+      <input type="text" id="autores" placeholder="Autores" required>
+      <input type="text" id="editora" placeholder="Editora" required>
+      <input type="number" id="anioPublicacion" placeholder="Año de Publicación" required>
+      <input type="text" id="ciencia" placeholder="Ciencia" required>
+      <input type="text" id="idioma" placeholder="Idioma" required>
+      <input type="text" id="estado" placeholder="Estado" required>
+      <button type="submit">Agregar Libro</button>
+    </form>
+
+    <h3>Lista de Libros</h3>
+    <ul id="libroList"></ul>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const libroForm = document.getElementById("libroForm");
+      const libroList = document.getElementById("libroList");
+      const API_URL = "http://localhost:3000/api/libros";
+
+      const cargarLibros = async () => {
+        const respuesta = await fetch(API_URL);
+        const libros = await respuesta.json();
+        libroList.innerHTML = "";
+        libros.forEach(libro => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <strong>${libro.descripcion}</strong> - ${libro.autores} (${libro.editora}) 
+            <br> ISBN: ${libro.isbn} | Año: ${libro.anioPublicacion} | Ciencia: ${libro.ciencia} | Idioma: ${libro.idioma} | Estado: ${libro.estado}
+            <button onclick="editarLibro(${libro.id})">✏️ Editar</button>
+            <button onclick="eliminarLibro(${libro.id})">❌ Eliminar</button>
+          `;
+          libroList.appendChild(li);
+        });
+      };
+
+      libroForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const nuevoLibro = {
+          descripcion: document.getElementById("descripcion").value,
+          signaturaTopografica: document.getElementById("signaturaTopografica").value,
+          isbn: document.getElementById("isbn").value,
+          tipoBibliografia: document.getElementById("tipoBibliografia").value,
+          autores: document.getElementById("autores").value,
+          editora: document.getElementById("editora").value,
+          anioPublicacion: document.getElementById("anioPublicacion").value,
+          ciencia: document.getElementById("ciencia").value,
+          idioma: document.getElementById("idioma").value,
+          estado: document.getElementById("estado").value
+        };
+
+        await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(nuevoLibro) });
+        cargarLibros();
+        libroForm.reset();
+      });
+
+      window.eliminarLibro = async (id) => {
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+        cargarLibros();
+      };
+
+      window.editarLibro = async (id) => {
+        const nuevaDescripcion = prompt("Nueva descripción:");
+        if (!nuevaDescripcion) return;
+
+        await fetch(`${API_URL}/${id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ descripcion: nuevaDescripcion })
+        });
+
+        cargarLibros();
+      };
+
+      cargarLibros();
+    });
+  </script>
+
+</body>
+</html>

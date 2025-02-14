@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autores - Sistema de Biblioteca</title>
+  <link rel="stylesheet" href="css/autores.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+          <h1>Sistema de Biblioteca - UNAPEC</h1>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="tiposBibliografia.html">Tipos de Bibliografía</a></li>
+            <li><a href="editoras.html">Editoras</a></li>
+            <li><a href="autores.html">Autores</a></li>
+            <li><a href="libros.html">Libros</a></li>
+          </ul>
+        </nav>
+      </header>
+
+  <!-- Formulario para agregar autor -->
+  <form id="autorForm">
+    <input type="text" id="nombre" placeholder="Nombre del autor" required>
+    <input type="text" id="paisOrigen" placeholder="País de origen" required>
+    <input type="text" id="idiomaNativo" placeholder="Idioma nativo" required>
+    <select id="estado" required>
+      <option value="activo">Activo</option>
+      <option value="inactivo">Inactivo</option>
+    </select>
+    <button type="submit">Agregar Autor</button>
+  </form>
+
+
+  <h2>Lista de Autores</h2>
+  <ul id="autoresList">
+    <!-- Aquí se agregan los autores -->
+  </ul>
+
+  <script>
+    // URL base de la API para los Autores
+    const apiUrl = 'http://localhost:3000/api/autores';
+
+    // Función para obtener los autores
+    const obtenerAutores = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        const autores = await response.json();
+        renderizarAutores(autores);
+      } catch (error) {
+        alert('Error al obtener autores: ' + error.message);
+      }
+    };
+
+    // Función para renderizar la lista de autores
+    const renderizarAutores = (autores) => {
+      const autoresList = document.getElementById('autoresList');
+      autoresList.innerHTML = ''; // Limpiar la lista antes de renderizar
+      if (autores.length === 0) {
+        autoresList.innerHTML = "<li>No hay autores registrados.</li>";
+      } else {
+        autores.forEach(autor => {
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span>${autor.nombre} - ${autor.paisOrigen} - ${autor.idiomaNativo} - ${autor.estado}</span>
+            <button class="delete" onclick="eliminarAutor(${autor.id})">Eliminar</button>
+            <button class="edit" onclick="editarAutor(${autor.id})">Editar</button>
+          `;
+          autoresList.appendChild(li);
+        });
+      }
+    };
+
+    // Función para agregar un autor
+    const agregarAutor = async (event) => {
+      event.preventDefault(); // Evitar que la página se recargue al enviar el formulario
+
+      const nuevoAutor = {
+        nombre: document.getElementById('nombre').value,
+        paisOrigen: document.getElementById('paisOrigen').value,
+        idiomaNativo: document.getElementById('idiomaNativo').value,
+        estado: document.getElementById('estado').value
+      };
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(nuevoAutor)
+        });
+
+        if (response.ok) {
+          const autorAgregado = await response.json();
+          console.log("Autor agregado:", autorAgregado);
+          obtenerAutores(); // Recargar la lista
+        } else {
+          console.error("Error al agregar el autor");
+        }
+      } catch (error) {
+        console.error("Error de red:", error);
+      }
+    };
+
+    // Función para eliminar un autor
+    const eliminarAutor = async (id) => {
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: 'DELETE'
+        });
+
+        if (!response.ok) {
+          throw new Error('No se pudo eliminar el autor');
+        }
+
+        const data = await response.json();
+        alert(data.mensaje);
+        obtenerAutores(); // Recargar la lista
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    // Función para editar un autor
+    const editarAutor = (id) => {
+      const nombre = prompt("Nuevo nombre:");
+      const paisOrigen = prompt("Nuevo país de origen:");
+      const idiomaNativo = prompt("Nuevo idioma nativo:");
+      const estado = prompt("Nuevo estado (activo/inactivo):");
+
+      const autorActualizado = { nombre, paisOrigen, idiomaNativo, estado };
+
+      fetch(`${apiUrl}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(autorActualizado)
+      })
+      .then(response => response.json())
+      .then(() => obtenerAutores())
+      .catch(error => alert("Error al actualizar el autor: " + error.message));
+    };
+
+    // Evento de submit en el formulario
+    document.getElementById('autorForm').addEventListener('submit', agregarAutor);
+
+    // Obtener los autores cuando cargue la página
+    window.onload = obtenerAutores;
+  </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editoras - Sistema de Biblioteca</title>
+  <link rel="stylesheet" href="css/editoras.css">
+</head>
+<body>
+  <header>
+    <a href="index.html">
+        <h1>Sistema de Biblioteca - UNAPEC</h1>
+    </a>
+    <nav>
+        <ul>
+            <li><a href="tiposBibliografia.html">Tipos de Bibliografía</a></li>
+            <li><a href="editoras.html">Editoras</a></li>
+            <li><a href="autores.html">Autores</a></li>
+            <li><a href="libros.html">Libros</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Gestión de Editoras</h2>
+    <form id="editoraForm">
+      <input type="text" id="descripcion" placeholder="Descripción" required>
+      <select id="estado">
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+      <button type="submit">Agregar Editora</button>
+    </form>
+
+    <h3>Lista de Editoras</h3>
+    <ul id="editoraList"></ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 UNAPEC. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const apiUrl = 'http://localhost:3000/api/editora';
+
+
+    const obtenerEditoras = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Error al obtener editoras');
+        const editoras = await response.json();
+        renderizarEditoras(editoras);
+      } catch (error) {
+        alert('Error al obtener editoras: ' + error.message);
+      }
+    };
+
+    const renderizarEditoras = (editoras) => {
+      const editoraList = document.getElementById('editoraList');
+      editoraList.innerHTML = '';
+      if (editoras.length === 0) {
+        editoraList.innerHTML = "<li>No hay editoras registradas.</li>";
+        return;
+      }
+      editoras.forEach(editora => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span><strong>ID:</strong> ${editora.id}</span> - 
+          <span><strong>Descripción:</strong> ${editora.descripcion}</span> - 
+          <span><strong>Estado:</strong> ${editora.estado}</span>
+          <button onclick="editarEditora(${editora.id})">Editar</button>
+          <button onclick="eliminarEditora(${editora.id})">Eliminar</button>
+        `;
+        editoraList.appendChild(li);
+      });
+    };
+
+    document.getElementById('editoraForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const descripcion = document.getElementById('descripcion').value;
+      const estado = document.getElementById('estado').value;
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ descripcion, estado })
+        });
+        if (!response.ok) throw new Error('Error al agregar editora');
+        obtenerEditoras();
+        document.getElementById('editoraForm').reset();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    const editarEditora = async (id) => {
+      const descripcion = prompt("Nueva descripción:");
+      const estado = prompt("Nuevo estado (activo/inactivo):");
+      if (!descripcion || !estado) return;
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ descripcion, estado })
+        });
+        if (!response.ok) throw new Error('Error al actualizar editora');
+        obtenerEditoras();
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    const eliminarEditora = async (id) => {
+      if (!confirm("¿Seguro que deseas eliminar esta editora?")) return;
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
+        if (!response.ok) throw new Error('Error al eliminar editora');
+        obtenerEditoras();
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    window.onload = obtenerEditoras;
+  </script>
+</body>
+</html>
