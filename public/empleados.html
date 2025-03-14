@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Empleados - Sistema de Biblioteca</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 20px;
+      background-color: white;
+      margin: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    form input, form select, form button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form button {
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #555;
+    }
+
+    ul#empleadoList {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul#empleadoList li {
+      background-color: #f9f9f9;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ul#empleadoList li button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    ul#empleadoList li button:hover {
+      background-color: #cc0000;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">
+        <h1>Sistema de Biblioteca - UNAPEC</h1>
+    </a>
+    <nav>
+        <ul>
+            <li><a href="tiposBibliografia.html">Tipos de Bibliografía</a></li>
+            <li><a href="editoras.html">Editoras</a></li>
+            <li><a href="autores.html">Autores</a></li>
+            <li><a href="libros.html">Libros</a></li>
+            <li><a href="empleados.html">Empleados</a></li>
+        </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Gestión de Empleados</h2>
+    <form id="empleadoForm">
+      <input type="text" id="nombre" placeholder="Nombre" required>
+      <input type="text" id="cedula" placeholder="Cédula" required>
+      <select id="tanda_labor" required>
+        <option value="Matutina">Matutina</option>
+        <option value="Vespertina">Vespertina</option>
+        <option value="Nocturna">Nocturna</option>
+      </select>
+      <input type="number" id="porciento_comision" placeholder="Porcentaje de Comisión" required>
+      <input type="date" id="fecha_ingreso" required>
+      <select id="estado" required>
+        <option value="Activo">Activo</option>
+        <option value="Inactivo">Inactivo</option>
+      </select>
+      <button type="submit">Agregar Empleado</button>
+    </form>
+
+    <h3>Lista de Empleados</h3>
+    <ul id="empleadoList"></ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 UNAPEC. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const apiUrl = 'http://localhost:3000/api/empleados';
+
+    // Obtener la lista de empleados
+    const obtenerEmpleados = async () => {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Error al obtener empleados');
+        const empleados = await response.json();
+        renderizarEmpleados(empleados);
+      } catch (error) {
+        alert('Error al obtener empleados: ' + error.message);
+      }
+    };
+
+    // Renderizar la lista de empleados
+    const renderizarEmpleados = (empleados) => {
+      const empleadoList = document.getElementById('empleadoList');
+      empleadoList.innerHTML = '';
+      if (empleados.length === 0) {
+        empleadoList.innerHTML = "<li>No hay empleados registrados.</li>";
+        return;
+      }
+      empleados.forEach(empleado => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span><strong>ID:</strong> ${empleado.id}</span> - 
+          <span><strong>Nombre:</strong> ${empleado.nombre}</span> - 
+          <span><strong>Cédula:</strong> ${empleado.cedula}</span> - 
+          <span><strong>Tanda Labor:</strong> ${empleado.tanda_labor}</span> - 
+          <span><strong>Comisión:</strong> ${empleado.porciento_comision}%</span> - 
+          <span><strong>Fecha Ingreso:</strong> ${empleado.fecha_ingreso}</span> - 
+          <span><strong>Estado:</strong> ${empleado.estado}</span>
+          <button onclick="editarEmpleado(${empleado.id})">Editar</button>
+          <button onclick="eliminarEmpleado(${empleado.id})">Eliminar</button>
+        `;
+        empleadoList.appendChild(li);
+      });
+    };
+
+    // Agregar un nuevo empleado
+    document.getElementById('empleadoForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const cedula = document.getElementById('cedula').value;
+      const tanda_labor = document.getElementById('tanda_labor').value;
+      const porciento_comision = document.getElementById('porciento_comision').value;
+      const fecha_ingreso = document.getElementById('fecha_ingreso').value;
+      const estado = document.getElementById('estado').value;
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ nombre, cedula, tanda_labor, porciento_comision, fecha_ingreso, estado })
+        });
+        if (!response.ok) throw new Error('Error al agregar empleado');
+        obtenerEmpleados();
+        document.getElementById('empleadoForm').reset();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    // Editar un empleado
+    const editarEmpleado = async (id) => {
+      const nombre = prompt("Nuevo nombre:");
+      const cedula = prompt("Nueva cédula:");
+      const tanda_labor = prompt("Nueva tanda labor (Matutina/Vespertina/Nocturna):");
+      const porciento_comision = prompt("Nuevo porcentaje de comisión:");
+      const fecha_ingreso = prompt("Nueva fecha de ingreso (YYYY-MM-DD):");
+      const estado = prompt("Nuevo estado (Activo/Inactivo):");
+      if (!nombre || !cedula || !tanda_labor || !porciento_comision || !fecha_ingreso || !estado) return;
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ nombre, cedula, tanda_labor, porciento_comision, fecha_ingreso, estado })
+        });
+        if (!response.ok) throw new Error('Error al actualizar empleado');
+        obtenerEmpleados();
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    // Eliminar un empleado
+    const eliminarEmpleado = async (id) => {
+      if (!confirm("¿Seguro que deseas eliminar este empleado?")) return;
+      try {
+        const response = await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
+        if (!response.ok) throw new Error('Error al eliminar empleado');
+        obtenerEmpleados();
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+
+    // Cargar la lista de empleados al iniciar la página
+    window.onload = obtenerEmpleados;
+  </script>
+</body>
+</html>

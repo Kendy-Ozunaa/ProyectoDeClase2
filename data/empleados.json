@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1696105600000,
+    "nombre": "Juan Perez Actualizado",
+    "cedula": "123456789",
+    "tanda_labor": "Matutina",
+    "porciento_comision": 10,
+    "fecha_ingreso": "2023-10-01",
+    "estado": "Inactivo"
+  },
+  {
+    "id": 1741974464384,
+    "nombre": "Juan Perez Actualizado",
+    "cedula": "123456789",
+    "tanda_labor": "Matutina",
+    "porciento_comision": 10,
+    "fecha_ingreso": "2023-10-01",
+    "estado": "Inactivo"
+  },
+  {
+    "id": 1741976910967,
+    "nombre": "carmen",
+    "cedula": "35122223",
+    "tanda_labor": "Matutina",
+    "porciento_comision": "10",
+    "fecha_ingreso": "2028-03-31",
+    "estado": "Activo"
+  }
+]
