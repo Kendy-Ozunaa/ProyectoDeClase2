@@ -1,14 +1,5 @@
 [
   {
-    "id": 1696105600000,
-    "nombre": "Juan Perez Actualizado",
-    "cedula": "123456789",
-    "tanda_labor": "Matutina",
-    "porciento_comision": 10,
-    "fecha_ingreso": "2023-10-01",
-    "estado": "Inactivo"
-  },
-  {
     "id": 1741974464384,
     "nombre": "Juan Perez Actualizado",
     "cedula": "123456789",

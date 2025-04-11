@@ -1,181 +1,180 @@
-/* Estilos generales */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+/* Reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f4f8fb;
   color: #333;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Estilo del encabezado */
+/* Encabezado */
 header {
-  background-color: #222;
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-  font-size: 1.2em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  margin: 0;
-  font-size: 2em;
-}
-
-/* Barra de navegación */
-header {
-  background-color: #222;
+  background-color: #003366;
   color: white;
   padding: 20px;
   text-align: center;
-  font-size: 24px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-header a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
+/* Navegación */
 /* Barra de navegación */
-nav {
-  background-color: #222;
-  padding: 10px 0;
-  text-align: center;
-}
-
 nav ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 15px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px 0;
+  background-color: #003366;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
-  font-size: 1.1em;
-  padding: 8px 15px;
-  transition: background-color 0.3s, border-radius 0.3s;
-  border-radius: 5px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
 }
 
 nav ul li a:hover {
-  background-color: #333;
+  background-color: #005199;
 }
 
-/* Sección de contenido */
+
+/* Sección principal */
 section {
-  padding: 20px;
-  max-width: 800px;
-  margin: 20px auto;
-  background: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: white;
   border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+section h2 {
   text-align: center;
-  color: #444;
+  margin-bottom: 25px;
+  color: #003366;
+}
+
+section h3 {
+  text-align: center;
+  margin-top: 40px;
+  color: #003366;
 }
 
 /* Formulario */
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  background: #eaf0f6;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin: 0 auto 40px auto;
 }
 
 form input {
-  padding: 12px;
+  padding: 12px 15px;
+  font-size: 16px;
+  border-radius: 6px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1em;
+  width: 100%;
 }
 
-button {
-  padding: 12px;
-  font-size: 1em;
-  background-color: #007bff;
+form button {
+  grid-column: span 2;
+  background-color: #005199;
   color: white;
+  padding: 12px 20px;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  justify-self: center;
 }
 
-button:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
+form button:hover {
+  background-color: #003f7f;
+}
+/* Lista de Libros */
+/* Estilo general para la lista de libros */
+#libroList li {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  align-items: center;
 }
 
-/* Lista de libros */
-ul#libroList {
-  padding: 0;
-  list-style: none;
-  margin-top: 20px;
+/* Estilo de la información del libro */
+#libroList li .info {
+  display: grid;
+  gap: 10px;
 }
 
-ul#libroList li {
-  background: #f9f9f9;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-left: 5px solid #007bff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+#libroList li .info span {
+  font-size: 14px;
+  color: #555;
 }
 
-ul#libroList li:hover {
-  transform: scale(1.02);
+/* Botones de editar y eliminar */
+#libroList li .botones {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }
 
-ul#libroList li strong {
-  color: #007bff;
+/* Estilo común para los botones de Eliminar y Editar */
+button.eliminar, button.editar {
+  padding: 8px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
 }
 
-ul#libroList li button {
-  margin-top: 8px;
-  padding: 8px;
-  font-size: 0.9em;
-  background-color: #dc3545;
+/* Estilo para el botón de Eliminar */
+button.eliminar {
+  background-color: #d9534f;
+  color: white;
 }
 
-ul#libroList li button:hover {
-  background-color: #a71d2a;
+button.eliminar:hover {
+  background-color: #c9302c;
 }
 
-/* Footer */
+/* Estilo para el botón de Editar */
+button.editar {
+  background-color: #5bc0de;
+  color: white;
+}
+
+button.editar:hover {
+  background-color: #31b0d5;
+}
+
+/* Pie de página */
 footer {
-  background-color: #222;
+  background-color: #003366;
   color: white;
   text-align: center;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  font-size: 0.9em;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  nav ul li {
-    display: block;
-    margin: 10px 0;
-  }
-
-  section {
-    padding: 15px;
-    width: 90%;
-  }
-
-  form {
-    padding: 10px;
-  }
+  padding: 20px;
+  font-size: 14px;
+  border-top: 3px solid #005199;
 }

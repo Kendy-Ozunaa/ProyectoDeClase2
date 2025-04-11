@@ -1,3 +1,17 @@
 {
-  "libros": []
+  "libros": [
+    {
+      "id": 1744299831372,
+      "descripcion": "Una novela de realismo mágico que narra la historia de la familia Buendía en el pueblo ficticio de Macondo.",
+      "signaturaTopografica": "863.7 G11c",
+      "isbn": "978-3-16-148410-0",
+      "tipoBibliografia": "Novela",
+      "autores": "Gabriel García Márquez",
+      "editora": "Editorial Sudamericana",
+      "anioPublicacion": "1967",
+      "ciencia": "Literatura",
+      "idioma": "Español",
+      "estado": "Disponible"
+    }
+  ]
 }

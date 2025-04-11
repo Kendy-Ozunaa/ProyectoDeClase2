@@ -1,67 +1,87 @@
-/* Estilos generales */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+/* Reset básico */
+* {
   margin: 0;
   padding: 0;
-  color: #333;
+  box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f4f8fb;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado */
 header {
-  background-color: #333;
+  background-color: #003366;
   color: white;
-  padding: 20px 0;
+  padding: 20px;
   text-align: center;
 }
 
-h1 {
-  margin: 0;
-  font-size: 2em;
+header a {
+  color: white;
+  text-decoration: none;
 }
 
-nav {
-  margin-top: 10px;
+header h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
+/* Navegación */
 nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 15px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px 0;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
-  font-size: 1.1em;
-  padding: 5px 10px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
   transition: background-color 0.3s;
 }
 
 nav ul li a:hover {
-  background-color: #575757;
-  border-radius: 5px;
+  background-color: #005199;
 }
 
-/* Estilos para las secciones del contenido */
+/* Contenido principal */
 section {
-  padding: 20px;
+  flex: 1;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-h2 {
-  color: #444;
+section h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
 }
 
-/* Estilos adicionales */
+section p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Footer */
 footer {
-  background-color: #333;
+  background-color: #003366;
   color: white;
   text-align: center;
-  padding: 10px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  padding: 20px;
+  font-size: 14px;
+  border-top: 3px solid #005199;
 }

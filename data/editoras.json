@@ -1,3 +1,24 @@
 {
-  "editoras": []
+  "editoras": [
+    {
+      "id": 1744299477363,
+      "descripcion": "Editorial Planeta",
+      "estado": "activo"
+    },
+    {
+      "id": 1744299503915,
+      "descripcion": "Editorial Penguin Random House",
+      "estado": "activo"
+    },
+    {
+      "id": 1744299510750,
+      "descripcion": "Editorial Espasa",
+      "estado": "activo"
+    },
+    {
+      "id": 1744299516168,
+      "descripcion": "Editorial Taurus",
+      "estado": "activo"
+    }
+  ]
 }

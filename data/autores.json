@@ -1,3 +1,39 @@
 {
-  "autores": []
+  "autores": [
+    {
+      "id": 1744299626613,
+      "nombre": "Gabriel García Márquez",
+      "paisOrigen": "Colombia",
+      "idiomaNativo": " Español",
+      "estado": "activo"
+    },
+    {
+      "id": 1744299654749,
+      "nombre": "J.K. Rowling",
+      "paisOrigen": "Reino Unido",
+      "idiomaNativo": "Inglés",
+      "estado": "activo"
+    },
+    {
+      "id": 1744299673046,
+      "nombre": "Isabel Allende",
+      "paisOrigen": "Chile",
+      "idiomaNativo": "español",
+      "estado": "activo"
+    },
+    {
+      "id": 1744299706916,
+      "nombre": "Albert Einstein",
+      "paisOrigen": " Alemania",
+      "idiomaNativo": "Alemán",
+      "estado": "inactivo"
+    },
+    {
+      "id": 1744299733468,
+      "nombre": "Albert Einstein",
+      "paisOrigen": " Alemania",
+      "idiomaNativo": "Alemán",
+      "estado": "inactivo"
+    }
+  ]
 }

@@ -1,140 +1,114 @@
-/* Estilos generales */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+/* Reset general para eliminar márgenes y rellenos por defecto */
+* {
   margin: 0;
   padding: 0;
-  color: #333;
+  box-sizing: border-box;
 }
 
-/* Estilo del encabezado */
+/* Estructura base */
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f4f8fb;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado */
 header {
-  background-color: #222;
+  background-color: #003366;
   color: white;
   padding: 20px;
   text-align: center;
-  font-size: 24px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header a {
-  color: white;
   text-decoration: none;
-  font-weight: bold;
+  color: white;
 }
 
 /* Barra de navegación */
-nav {
-  background-color: #222;
-  padding: 10px 0;
-  text-align: center;
-}
-
 nav ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 15px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px 0;
+  background-color: #003366;
 }
 
 nav ul li a {
   color: white;
   text-decoration: none;
-  font-size: 1.1em;
-  padding: 8px 15px;
-  transition: background-color 0.3s, border-radius 0.3s;
-  border-radius: 5px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
 }
 
 nav ul li a:hover {
-  background-color: #333;
+  background-color: #005199;
 }
 
-/* Sección de contenido */
+/* Sección principal */
 section {
-  max-width: 800px;
-  margin: 20px auto;
+  flex: 1;
+  max-width: 1000px;
+  margin: 40px auto;
   padding: 30px;
-  background: white;
+  background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+section h2 {
   text-align: center;
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  color: #003366;
 }
 
-/* Estilo del formulario */
+section h3 {
+  text-align: center;
+  margin-top: 40px;
+  color: #003366;
+}
+
+/* Formulario de Agregar Editora */
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  background: #eaeaea;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  background: #eaf0f6;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
 }
 
-form input,
-form select {
-  padding: 12px;
+form input, form select {
+  padding: 12px 15px;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 6px;
   border: 1px solid #ccc;
   width: 100%;
 }
 
 form button {
-  background-color: #222;
+  background-color: #005199;
   color: white;
   padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  align-self: center;
   font-size: 16px;
-  transition: background 0.3s;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  justify-self: center;
 }
 
 form button:hover {
-  background-color: #575757;
-}
-
-/* Formulario de edición */
-#formularioEdicion {
-  display: none;
-  margin-top: 30px;
-}
-
-#formularioEdicion input,
-#formularioEdicion select {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-#formularioEdicion button {
-  background-color: #28a745;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 20px;
-  font-size: 16px;
-}
-
-#formularioEdicion button:hover {
-  background-color: #218838;
+  background-color: #003f7f;
 }
 
 /* Lista de editoras */
@@ -142,17 +116,21 @@ form button:hover {
   list-style: none;
   padding: 0;
   margin-top: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #editoraList li {
-  background: #fff;
-  padding: 12px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 #editoraList li span {
@@ -160,41 +138,51 @@ form button:hover {
   color: #333;
 }
 
-/* Botones de editar y eliminar */
-button.edit,
-button.delete {
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s;
-  border: none;
+/* Botones de acción (Eliminar / Editar) */
+#editoraList li .actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;  /* Acomoda los botones a la derecha */
+}
+
+#editoraList li button.edit {
+  background-color: #1e90ff !important; /* Asegura que el color azul se aplique */
   color: white;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto;  /* Asegura que los botones no sean demasiado anchos */
 }
 
-button.edit {
-  background-color: #1e90ff;
+#editoraList li button.edit:hover {
+  background-color: #1565c0 !important; /* Asegura que el color de hover se aplique */
 }
 
-button.edit:hover {
-  background-color: #1565c0;
+#editoraList li button.delete {
+  background-color: #dc143c !important; /* Asegura que el color rojo se aplique */
+  color: white;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto;
 }
 
-button.delete {
-  background-color: #dc143c;
-}
-
-button.delete:hover {
-  background-color: #a00027;
+#editoraList li button.delete:hover {
+  background-color: #a00027 !important; /* Asegura que el color de hover se aplique */
 }
 
 /* Pie de página */
 footer {
-  background-color: #222;
+  background-color: #003366;
   color: white;
   text-align: center;
-  padding: 15px;
-  margin-top: 30px;
+  padding: 20px;
   font-size: 14px;
-  border-top: 3px solid #575757;
+  border-top: 3px solid #005199;
 }

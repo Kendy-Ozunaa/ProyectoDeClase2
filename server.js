@@ -15,6 +15,7 @@ app.use("/api/autores", require("./routes/autores"));
 app.use("/api/libros", require("./routes/libros"));
 app.use("/api/empleados", require("./routes/empleados")); // Nueva ruta para empleados
 
+
 // Ruta de prueba
 app.get("/", (req, res) => {
     res.send("¡Servidor funcionando! Prueba con /api/editora");
