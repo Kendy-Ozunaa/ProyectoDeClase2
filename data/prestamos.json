@@ -1,0 +1,103 @@
+{
+  "prestamos": [
+    {
+      "id": 1744380337826,
+      "usuario": "josue",
+      "carnet": "231321",
+      "libroId": "000",
+      "tituloLibro": "Sin título",
+      "ciencia": "ficcion",
+      "fechaPrestamo": "1313-12-12",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    },
+    {
+      "id": 1744380438789,
+      "usuario": "Manolo",
+      "carnet": "No definido",
+      "libroId": "100 Años de soledad",
+      "tituloLibro": "100 Años de soledad",
+      "ciencia": "Novela",
+      "fechaPrestamo": "2025-02-20",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    },
+    {
+      "id": 1744380805350,
+      "usuario": "Maria",
+      "carnet": "No definido",
+      "libroId": "05",
+      "tituloLibro": "05",
+      "ciencia": "Poecia",
+      "fechaPrestamo": "2554-03-02",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    },
+    {
+      "id": 1744380856482,
+      "usuario": "Mario",
+      "carnet": "No definido",
+      "libroId": "306",
+      "tituloLibro": "306",
+      "ciencia": "Literatura",
+      "fechaPrestamo": "6659-12-12",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    },
+    {
+      "id": 1744402432254,
+      "usuario": "Rafael",
+      "carnet": "No definido",
+      "libroId": "Revolution",
+      "tituloLibro": "Revolution",
+      "ciencia": "ficcion",
+      "fechaPrestamo": "2025-04-11",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    },
+    {
+      "id": 1744403751425,
+      "usuario": "Juan Pérez",
+      "carnet": "No definido",
+      "libroId": "La Odisea",
+      "tituloLibro": "La Odisea",
+      "ciencia": "Literatura",
+      "fechaPrestamo": "2025-04-12",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    },
+    {
+      "id": 1744404826861,
+      "usuario": "Mario",
+      "carnet": "No definido",
+      "libroId": "PiterPan",
+      "tituloLibro": "PiterPan",
+      "ciencia": "Accion",
+      "fechaPrestamo": "2026-02-03",
+      "fechaDevolucion": "",
+      "estado": "Prestado"
+    },
+    {
+      "id": 1744410648144,
+      "usuario": "Rafael",
+      "carnet": "No definido",
+      "libroId": "100 Años de soledad",
+      "tituloLibro": "100 Años de soledad",
+      "ciencia": "Novela",
+      "fechaPrestamo": "2025-02-11",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    },
+    {
+      "id": 1744411983564,
+      "usuario": "Emely",
+      "carnet": "No definido",
+      "libroId": "HarryPotter",
+      "tituloLibro": "HarryPotter",
+      "ciencia": "fantasia",
+      "fechaPrestamo": "2025-04-11",
+      "fechaDevolucion": "2025-04-11",
+      "estado": "Devuelto"
+    }
+  ]
+}

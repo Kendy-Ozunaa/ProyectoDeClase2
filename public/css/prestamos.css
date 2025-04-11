@@ -1,0 +1,167 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f8fb;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  header a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* Barra de navegación */
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 10px 0;
+    background-color: #003366;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    background-color: #005199;
+  }
+  
+  /* Sección principal */
+  section {
+    flex: 1;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  section h2, section h3 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 25px;
+  }
+  
+  /* Formulario de préstamo */
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: #eaf0f6;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 1000px;
+    margin: 0 auto 40px auto;
+  }
+  
+  form input {
+    padding: 12px 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  
+  form button {
+    grid-column: span 2;
+    background-color: #005199;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200px;
+    justify-self: center;
+  }
+  
+  form button:hover {
+    background-color: #003f7f;
+  }
+  
+  /* Buscador */
+  .busqueda {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    background: #f1f6fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+  
+  .busqueda input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .busqueda button {
+    background-color: #005199;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .busqueda button:hover {
+    background-color: #003f7f;
+  }
+  
+  /* Lista de préstamos */
+  #prestamoList {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  #prestamoList li {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid #005199;
+  }
+  
+  #prestamoList li.devuelto {
+    border-left-color: green;
+  }
+  
+  /* Pie de página */
+  footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    border-top: 3px solid #005199;
+    margin-top: 40px;
+  }
+  

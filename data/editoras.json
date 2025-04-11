@@ -11,14 +11,14 @@
       "estado": "activo"
     },
     {
-      "id": 1744299510750,
-      "descripcion": "Editorial Espasa",
-      "estado": "activo"
-    },
-    {
       "id": 1744299516168,
       "descripcion": "Editorial Taurus",
       "estado": "activo"
+    },
+    {
+      "id": 1744410188911,
+      "descripcion": "El diablo",
+      "estado": "Activo"
     }
   ]
 }

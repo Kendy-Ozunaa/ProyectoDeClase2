@@ -16,5 +16,23 @@
     "porciento_comision": "10",
     "fecha_ingreso": "2028-03-31",
     "estado": "Activo"
+  },
+  {
+    "id": 1744410578664,
+    "nombre": "Albert Einstein",
+    "cedula": "3444444444441",
+    "tanda_labor": "Nocturna",
+    "porciento_comision": "10",
+    "fecha_ingreso": "2025-04-24",
+    "estado": "Activo"
+  },
+  {
+    "id": 1744411906129,
+    "nombre": "Emely",
+    "cedula": "402-11111111111",
+    "tanda_labor": "Vespertina",
+    "porciento_comision": "10",
+    "fecha_ingreso": "2025-04-19",
+    "estado": "Activo"
   }
 ]

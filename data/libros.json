@@ -12,6 +12,19 @@
       "ciencia": "Literatura",
       "idioma": "Español",
       "estado": "Disponible"
+    },
+    {
+      "id": 1744410494003,
+      "descripcion": "sfsdfsdfsdfsfsfsdf",
+      "signaturaTopografica": "fsdfdsfsdfsd",
+      "isbn": "978-3-16-148410-0",
+      "tipoBibliografia": "Enciclopedia",
+      "autores": "Trujillo",
+      "editora": "Editorial Sudamericana",
+      "anioPublicacion": "2017",
+      "ciencia": "Literatura",
+      "idioma": "Español",
+      "estado": "Disponible"
     }
   ]
 }

@@ -14,7 +14,6 @@ html, body {
   flex-direction: column;
 }
 
-/* Encabezado */
 header {
   background-color: #003366;
   color: white;
@@ -22,7 +21,11 @@ header {
   text-align: center;
 }
 
-/* Navegación */
+header a {
+  text-decoration: none;
+  color: white;
+}
+
 /* Barra de navegación */
 nav ul {
   list-style: none;

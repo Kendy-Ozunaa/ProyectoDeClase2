@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Préstamos - Biblioteca UNAPEC</title>
+  <link rel="stylesheet" href="css/prestamos.css">
+</head>
+<body>
+  <header>
+    <a href="index.html">
+        <h1>Sistema de Biblioteca - UNAPEC</h1>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="tiposBibliografia.html">Tipos de Bibliografía</a></li>
+        <li><a href="editoras.html">Editoras</a></li>
+        <li><a href="autores.html">Autores</a></li>
+        <li><a href="libros.html">Libros</a></li>
+        <li><a href="empleados.html">Empleados</a></li> <!-- Corregido -->
+        <li><a href="prestamos.html">Prestamos y Devoluciones</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h2>Registrar Préstamo</h2>
+    <form id="prestamoForm">
+      <input type="text" id="usuario" placeholder="Usuario (Nombre o ID)" required>
+      <input type="text" id="libro" placeholder="Libro (ID o Título)" required>
+      <input type="date" id="fechaPrestamo" required>
+      <input type="date" id="fechaDevolucion" required>
+      <input type="text" id="ciencia" placeholder="Ciencia" required>
+      <button type="submit">Guardar Préstamo</button>
+    </form>
+
+    <h2>Buscar Préstamos</h2>
+    <div class="busqueda">
+      <input type="text" id="criterioUsuario" placeholder="Usuario">
+      <input type="text" id="criterioEstado" placeholder="Estado">
+      <input type="text" id="criterioCiencia" placeholder="Ciencia">
+      <input type="text" id="criterioLibro" placeholder="Libro">
+      <button onclick="buscarPrestamos()">Buscar</button>
+      <button onclick="cargarPrestamos()">Limpiar</button>
+    </div>
+
+    <h3>Lista de Préstamos</h3>
+    <ul id="prestamoList"></ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 UNAPEC - Proyecto Biblioteca</p>
+  </footer>
+
+  <script>
+    const API_URL = "http://localhost:3000/api/prestamos";
+
+    const prestamoForm = document.getElementById("prestamoForm");
+    const prestamoList = document.getElementById("prestamoList");
+
+    prestamoForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const prestamo = {
+        usuario: document.getElementById("usuario").value,
+        libro: document.getElementById("libro").value,
+        fechaPrestamo: document.getElementById("fechaPrestamo").value,
+        fechaDevolucion: document.getElementById("fechaDevolucion").value,
+        ciencia: document.getElementById("ciencia").value
+      };
+
+      await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(prestamo)
+      });
+
+      prestamoForm.reset();
+      cargarPrestamos();
+    });
+
+    const cargarPrestamos = async () => {
+      const res = await fetch(API_URL);
+      const prestamos = await res.json();
+      mostrarPrestamos(prestamos);
+    };
+
+    const mostrarPrestamos = (prestamos) => {
+      prestamoList.innerHTML = "";
+      prestamos.forEach(p => {
+        const li = document.createElement("li");
+        li.classList.toggle("devuelto", p.estado === "Devuelto");
+        li.innerHTML = `
+          <strong>${p.usuario}</strong> prestó <em>${p.tituloLibro || p.libro}</em><br>
+          Fecha Préstamo: ${p.fechaPrestamo} | Devolver antes del: ${p.fechaDevolucion || "Sin definir"}<br>
+          Ciencia: ${p.ciencia} | Estado: <strong>${p.estado}</strong><br>
+          ${p.estado === "Prestado" ? `<button onclick="devolverPrestamo(${p.id})">📦 Devolver</button>` : ""}
+        `;
+        prestamoList.appendChild(li);
+      });
+    };
+
+    const devolverPrestamo = async (id) => {
+      await fetch(`${API_URL}/devolver/${id}`, { method: "PUT" });
+      cargarPrestamos();
+    };
+
+    const buscarPrestamos = async () => {
+      const usuario = document.getElementById("criterioUsuario").value;
+      const estado = document.getElementById("criterioEstado").value;
+      const ciencia = document.getElementById("criterioCiencia").value;
+      const libro = document.getElementById("criterioLibro").value;
+
+      const query = new URLSearchParams();
+      if (usuario) query.append("usuario", usuario);
+      if (estado) query.append("estado", estado);
+      if (ciencia) query.append("ciencia", ciencia);
+      if (libro) query.append("libro", libro);
+
+      const res = await fetch(`${API_URL}/buscar?${query.toString()}`);
+      const resultados = await res.json();
+      mostrarPrestamos(resultados);
+    };
+
+    cargarPrestamos();
+  </script>
+</body>
+</html>

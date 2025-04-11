@@ -29,10 +29,17 @@
       "estado": "inactivo"
     },
     {
-      "id": 1744299733468,
-      "nombre": "Albert Einstein",
+      "id": 1744404131140,
+      "nombre": "Papito",
+      "paisOrigen": "Cuba",
+      "idiomaNativo": "Español",
+      "estado": "activo"
+    },
+    {
+      "id": 1744410328388,
+      "nombre": "Gab",
       "paisOrigen": " Alemania",
-      "idiomaNativo": "Alemán",
+      "idiomaNativo": "Inglés",
       "estado": "inactivo"
     }
   ]
